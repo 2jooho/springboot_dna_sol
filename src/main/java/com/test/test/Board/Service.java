@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//db에 테이블을 만들고 유전자 업체로 부터 받아온 정보를 넣을 col을 만듬
 @Entity
 @Table(
         name = "request_table"
@@ -62,11 +63,12 @@ public class Service implements Serializable {
     @Column(
             name = "post"
     )
+
     private String post;
 
     public Service() {
     }
-
+// 발주요청 날짜 자동 입력
     public String getOrder_id() {
         Date from = new Date();
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -74,6 +76,7 @@ public class Service implements Serializable {
         return this.order_id;
     }
 
+    //각 db column에 유전자 정보 넣기
     public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
@@ -81,6 +84,8 @@ public class Service implements Serializable {
     public String getOrder_date() {
         return this.order_date;
     }
+
+
 
     public String getAmount() {
         return this.amount;

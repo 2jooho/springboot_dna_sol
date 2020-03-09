@@ -17,12 +17,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+//파일을 서버에 업로드하고 다운로드 할 수 있게해줌
 @Service
 public class FileUploadDownloadService {
     private final Path fileLocation;
 
     @Autowired
-
     public FileUploadDownloadService(FileUploadProperties prop) {
         this.fileLocation = Paths.get(prop.getUploadDir())
                 .toAbsolutePath().normalize();

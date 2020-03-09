@@ -51,6 +51,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+//전체적인 부분을 중간에서 컨트롤하는 곳
 @Controller
 public class UserController {
     public static String create_id;
@@ -65,7 +66,7 @@ public class UserController {
 
     public UserController() {
     }
-
+    //upload.jsp부분을 띄우기 위해 접속 url get형식으로 구축
     @RequestMapping(
             value = {"/uploadFile"},
             method = {RequestMethod.GET}
@@ -73,7 +74,7 @@ public class UserController {
     public String upload() {
         return "upload";
     }
-
+//업로드 파일 post형식으로 서버에 저장 다운로드 url 설정
     @PostMapping({"/uploadFile"})
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = this.service.storeFile(file);
@@ -81,7 +82,7 @@ public class UserController {
         new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
         return "redirect:uploadFile";
     }
-
+//여러개 파일 업로드 접속 url
     @RequestMapping(
             value = {"/uploadMultipleFiles"},
             method = {RequestMethod.GET}
@@ -146,6 +147,7 @@ public class UserController {
         return "pdf_url";
     }*/
 
+  //edgc에 배송 요청 리스트 url
     @RequestMapping({"/list"})
     public String list(Model model) {
         List<Service> list = (List)this.memberDao.findAll();
@@ -160,7 +162,7 @@ public class UserController {
     public String add() {
         return "add";
     }
-
+//~/add에서 입력값을 json형식으로 만들어 edgc에 post로 보내고 list페이지 열기
     @RequestMapping(
             value = {"/add"},
             method = {RequestMethod.POST}
@@ -196,6 +198,7 @@ public class UserController {
         obj2.put("user", map3);
         arr.add(obj2);
         map.put("orders", arr);
+
         String url = "https://lims.edgc.com/api/medipresso/job.do";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -203,7 +206,7 @@ public class UserController {
         RestTemplate restTemplate = new RestTemplate();
         String respon = (String)restTemplate.postForObject(url, entity, String.class, new Object[0]);
         ObjectMapper objectMapper = new ObjectMapper();
-
+//성공적으로 보냈을때 띄움
         try {
             Request t = (Request)objectMapper.readValue(respon, Request.class);
             System.out.println("status = " + t.getStatus());
@@ -217,6 +220,7 @@ public class UserController {
         return "redirect:list";
     }
 
+//edgc로 부터 받는json을 풀어서 db에 저장
     @PostMapping({"/edgc/api"})
     @ResponseBody
     public response createUser(@RequestBody UserEntity user) {
