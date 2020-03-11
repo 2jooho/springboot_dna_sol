@@ -22,10 +22,47 @@ content type : application/json
 
 ***   
 # DB에 저장된 데이터
-1. [ kit 관련 정보] 
-<img src="./readme_img/db_user.png" width="300px" height="150px" alt="db_user">
-2. [ gene 관련 정보] 
-<img src="./readme_img/db_gene.png" width="450px" height="350px" alt="db_gene">
-3. [ disease 관련 정보] 
-<img src="./readme_img/db_disease.png" width="450px" height="300px" alt="db_disease">
 
+### `1. [ kit 관련 정보]` 
+
+<img src="./readme_img/db_user.png" width="300px" height="150px" alt="db_user"><br/>
+
+### `2. [ gene 관련 정보]` 
+
+<img src="./readme_img/db_gene.png" width="450px" height="350px" alt="db_gene"><br/>
+
+### `3. [ disease 관련 정보]`   
+ 
+<img src="./readme_img/db_disease.png" width="450px" height="300px" alt="db_disease"><br/>
+
+***
+
+# 코드 소개
+
+* board   
+
+JSON 포맷에 맞도록 요청 후 정상적으로 등록되면 보낼 status, message   
+
+* Controll   
+
+MVC모델중 C로 JSON을 파서 하고 POST/GET 형식, Http 등에 대한 상세 코드   
+
+* delivery   
+
+바코드, url, 주문번호등을 db에 넣는 부분   
+
+* domain   
+
+유전자 결과 위험도 유전자 명 등을 db에 넣는 부분   
+
+* property   
+
+서버에 파일 업로드   
+
+* upload   
+
+업로드파일 정보 추출
+
+*  selvice   
+
+파일 업로드/다운로드 서비스 부분
